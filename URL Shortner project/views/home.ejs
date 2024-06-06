@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        .urlTable {
+            margin: 20px auto;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .urlTable table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .urlTable th,
+        .urlTable td {
+            border: 1px solid #333;
+            padding: 10px;
+
+        }
+
+        .urlTable th {
+            background-color: #333;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .urlTable tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .urlTable tbody tr:hover {
+            background-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            /* Adjust background color as needed */
+            padding: 20px;
+        }
+
+        .center {
+            text-align: center;
+            margin-bottom: 20px;
+            /* Adjust margin as needed */
+        }
+
+        p {
+            margin-bottom: 10px;
+            /* Adjust margin as needed */
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            /* Adjust link color as needed */
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            /* Adjust margin as needed */
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+            /* Darker green on hover */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>URL Shortner</h1>
+    <% if (locals.id) { %>
+        <center>Congratulations</center>
+        <center>
+            <p>URL Generated: http://localhost:8001/url/<%= id %>
+            </p>
+        </center>
+        </p>
+        <center>
+            <a href="/"><button>Home</button></a>
+        </center>
+        <% } %>
+
+            <div>
+                <form method="POST" action="/url">
+                    <label>Enter Your Original URL.</label>
+                    <input type="text" name="url" placeholder="https://example.com">
+                    <button type="submit">Generate</button>
+                </form>
+            </div>
+            <div class="urlTable">
+                <% if (locals.urls) { %>
+                    <table>
+                        <thead>
+                            <th>S. No</th>
+                            <th>Short ID</th>
+                            <th>Redirect</th>
+                            <th>Clicks</th>
+                        </thead>
+                        <tbody>
+                            <% urls.forEach((url,index)=> { %>
+                                <tr>
+                                    <td>
+                                        <%= index + 1 %>
+                                    </td>
+                                    <td>
+                                        <%= "http://localhost:8001/url/" +url.shortId %>
+                                    </td>
+                                    <td>
+                                        <%= url.redirectURL %>
+                                    </td>
+                                    <td>
+                                        <%= url.visitHistory.length %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                    <% } %>
+            </div>
+</body>
+
+</html>
