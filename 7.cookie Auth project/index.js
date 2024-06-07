@@ -45,9 +45,8 @@ app.post('/login',(req,res) => {
     //render the dashboard
     if(userFound){
         res.redirect('/dashboard');
-    }
+    } else res.redirect('/login');
     // rediret the user to login page
-    res.redirect('/login');
 })
 
 // route for DashBoard
